@@ -24,7 +24,7 @@ def main():
         v_x=25,
         v_y=-60,
         boundary_x=Window.HEIGHT,
-        boundary_y=Window.HEIGHT,
+        boundary_y=Window.WIDTH,
         color=Colors.PINK,
     )
     timestep = 100
