@@ -1,6 +1,6 @@
 class Window:
     WIDTH = 1000
-    HEIGHT = 1000
+    HEIGHT = 700
     SIZE = (WIDTH, HEIGHT)
 
 
