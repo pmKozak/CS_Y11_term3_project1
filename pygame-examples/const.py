@@ -11,3 +11,4 @@ class Colors:
 
 class Gravity:
     Earth = (9.81, 0)
+    No = (0, 0)
