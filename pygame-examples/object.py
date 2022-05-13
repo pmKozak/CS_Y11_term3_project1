@@ -12,8 +12,6 @@ class Object:
         width: float,
         v_x: float,
         v_y: float,
-        boundary_x: float,
-        boundary_y: float,
         color: Tuple[int, int, int],
     ):
         self.x = x
@@ -22,19 +20,18 @@ class Object:
         self.v_y = v_y
         self.width = width
         self.height = height
-        self.boundary_x = boundary_x
-        self.boundary_y = boundary_y
         self.color = color
 
     def update(self, acceleration: Tuple[float, float], timestep: float):
+        boundary_y, boundary_x = pygame.display.get_surface().get_size()
         a_x, a_y = acceleration
         self.v_x += a_x * timestep
         self.v_y += a_y * timestep
         self.x += self.v_x * timestep
         self.y += self.v_y * timestep
-        if self.x + self.height / 2 >= self.boundary_x or self.x - self.height / 2 <= 0:
+        if self.x + self.height / 2 >= boundary_x or self.x - self.height / 2 <= 0:
             self.v_x = -self.v_x
-        if self.y + self.width / 2 >= self.boundary_y or self.y - self.width / 2 <= 0:
+        if self.y + self.width / 2 >= boundary_y or self.y - self.width / 2 <= 0:
             self.v_y = -self.v_y
 
     def draw(self, surface):
