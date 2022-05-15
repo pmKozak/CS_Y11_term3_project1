@@ -1,7 +1,17 @@
 import pygame
-from .const import Colors, Window, Gravity
-from .object import Object
+from const import Colors, Window, Gravity
+from object import Object
 
+
+def control_object(obj):
+    if pygame.key.get_pressed()[pygame.K_UP]:
+        obj.v_x -= 10
+    if pygame.key.get_pressed()[pygame.K_DOWN]:
+        obj.v_x += 10
+    if pygame.key.get_pressed()[pygame.K_RIGHT]:
+        obj.v_y += 10
+    if pygame.key.get_pressed()[pygame.K_LEFT]:
+        obj.v_y -= 10
 
 def main():
     obj = Object(
@@ -16,9 +26,7 @@ def main():
     timestep = 100
     pygame.init()
     clock = pygame.time.Clock()
-    surface = pygame.display.set_mode(
-        Window.SIZE
-    )  # Displaying on specified window size
+    surface = pygame.display.set_mode(Window.SIZE)  # Displaying on specified window size
     pygame.display.set_caption("Our game")
     run = True
     while run:
@@ -28,11 +36,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # To quit on clicking the X
                 run = False
-        if pygame.key.get_pressed()[pygame.K_UP]:
-            pygame.KEYUP
-            obj.v_x += 10
-        if pygame.key.get_pressed()[pygame.K_DOWN]:
-            obj.v_x -= 10
+        control_object(obj)
         obj.update(Gravity.No, timestep / 1000)
         obj.draw(surface)
         pygame.display.update()  # To update the display with newly added codes
