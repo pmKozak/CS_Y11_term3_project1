@@ -12,6 +12,10 @@ def control_object(obj):
         obj.v_y += 10
     if pygame.key.get_pressed()[pygame.K_LEFT]:
         obj.v_y -= 10
+    if pygame.key.get_pressed()[pygame.K_SPACE]:
+        obj.v_x = 0
+        obj.v_y = 0
+
 
 def main():
     obj = Object(
