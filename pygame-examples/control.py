@@ -1,6 +1,6 @@
 import pygame
 from const import Colors, Window, Gravity
-from object import Object
+from object import RectangularObject
 
 
 def control_object(obj):
@@ -18,7 +18,7 @@ def control_object(obj):
 
 
 def main():
-    obj = Object(
+    obj = RectangularObject(
         x=100,
         y=100,
         height=40,
@@ -41,7 +41,7 @@ def main():
             if event.type == pygame.QUIT:  # To quit on clicking the X
                 run = False
         control_object(obj)
-        obj.update(Gravity.No, timestep / 1000)
+        obj.update(Gravity.No, timestep / 1000, [])
         obj.draw(surface)
         pygame.display.update()  # To update the display with newly added codes
 
