@@ -21,7 +21,7 @@ def check_if_overlaps_y(first, second):
         return first.y - first.width / 2 < second.y + second.width / 2
 
 
-class Object:
+class RectangularObject:
     def __init__(
         self,
         x: float,
@@ -40,7 +40,7 @@ class Object:
         self.height = height
         self.color = color
 
-    def update(self, acceleration: Tuple[float, float], timestep: float, others: List['Object']):
+    def update(self, acceleration: Tuple[float, float], timestep: float, objects: List['RectangularObject']):
         boundary_y, boundary_x = pygame.display.get_surface().get_size()
         a_x, a_y = acceleration
         self.v_x += a_x * timestep
@@ -51,7 +51,9 @@ class Object:
             self.v_x = -self.v_x
         if self.y + self.width / 2 >= boundary_y or self.y - self.width / 2 <= 0:
             self.v_y = -self.v_y
-        for other in others:
+        for other in objects:
+            if other is self:
+                continue
             if check_if_overlaps(self, other):
                 self.v_x = -self.v_x
                 self.v_y = -self.v_y
@@ -64,4 +66,44 @@ class Object:
         )
         pygame.draw.rect(surface, self.color, rect)
 
+
+class RoundObject:
+    def __init__(
+        self,
+        x: float,
+        y: float,
+        radius: float,
+        v_x: float,
+        v_y: float,
+        color: Tuple[int, int, int],
+    ):
+        self.x = x
+        self.y = y
+        self.v_x = v_x
+        self.v_y = v_y
+        self.radius = radius
+        self.color = color
+
+    def update(self, acceleration: Tuple[float, float], timestep: float, objects: List['RoundObject']):
+        boundary_x, boundary_y = pygame.display.get_surface().get_size()
+        a_x, a_y = acceleration
+        self.v_x += a_x * timestep
+        self.v_y += a_y * timestep
+        self.x += self.v_x * timestep
+        self.y += self.v_y * timestep
+        if self.x + self.radius >= boundary_x or self.x - self.radius <= 0:
+            self.v_x = -self.v_x
+        if self.y + self.radius >= boundary_y or self.y - self.radius <= 0:
+            self.v_y = -self.v_y
+        for other in objects:
+            if other is self:
+                continue
+            if (self.x - other.x)**2 + (self.y - other.y)**2 <= (self.radius + other.radius)**2:
+                other.v_x = - other.v_x
+                other.v_y = - other.v_y
+                self.v_x = - self.v_x
+                self.v_y = - self.v_y
+
+    def draw(self, surface):
+        pygame.draw.circle(surface, self.color, (self.x, self.y), self.radius)
 
