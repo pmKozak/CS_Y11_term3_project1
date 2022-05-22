@@ -1,34 +1,52 @@
 import pygame
 
 from const import Window, Colors, Gravity
-from object import Object
+from object import RectangularObject, RoundObject
 
 
 def main():
-    obj = Object(
+    obj = RectangularObject(
         x=100,
         y=100,
-        height=40,
         width=40,
-        v_x=25,
-        v_y=25,
+        height=40,
+        v_x=0,
+        v_y=0,
         color=Colors.PINK,
     )
-    obj2 = Object(
+    obj2 = RectangularObject(
         x=100,
-        y=500,
-        height=40,
+        y=200,
         width=40,
-        v_x=-15,
-        v_y=15,
-        color=Colors.BLUE,
+        height=40,
+        v_x=15,
+        v_y=35,
+        color=Colors.PINK,
     )
+    # obj = RoundObject(
+    #     x=100,
+    #     y=100,
+    #     radius=10,
+    #     v_x=0,
+    #     v_y=0,
+    #     color=Colors.PINK,
+    # )
+    # obj2 = RoundObject(
+    #     x=100,
+    #     y=500,
+    #     radius=40,
+    #     v_x=-15,
+    #     v_y=15,
+    #     color=Colors.BLUE,
+    # )
     timestep = 100
     pygame.init()
     clock = pygame.time.Clock()
     surface = pygame.display.set_mode(
         Window.SIZE, pygame.RESIZABLE
     )  # Displaying on specified window size
+    print(pygame.display.get_surface().get_size())
+    print(Window.SIZE)
     pygame.display.set_caption("Our game")
     run = True
     while run:
@@ -38,7 +56,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # To quit on clicking the X
                 run = False
-        obj.update(Gravity.Earth, timestep / 1000, [obj2])
+        obj.update(Gravity.Earth, timestep / 1000, [])
         obj2.update(Gravity.Earth, timestep / 1000, [obj])
         obj.draw(surface)
         obj2.draw(surface)
