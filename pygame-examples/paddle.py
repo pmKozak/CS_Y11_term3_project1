@@ -22,7 +22,7 @@ class Paddle:
         self.v_x = v_x
         self.v_y = v_y
         window_width, window_height = pygame.display.get_surface().get_size()
-        self.width = window_width // 50
+        self.width = window_width // 40
         self.height = window_height // 5
         self.color = color
         assert 0 <= friction <= 1

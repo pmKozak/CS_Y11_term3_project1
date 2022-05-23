@@ -6,11 +6,17 @@ from paddle import Paddle
 from ball import Ball
 
 
-def restart_game(ball: Ball):
+def restart_game(ball: Ball, min_velocity: int = 30, max_velocity: int = 50):
+    assert 0 < min_velocity < max_velocity
     ball.x = Window.WIDTH // 2
     ball.y = Window.HEIGHT // 2
-    ball.v_x = random.randint(-20, 20)
-    ball.v_y = random.randint(-20, 20)
+    v_x = 0
+    v_y = 0
+    while v_x ** 2 + v_y ** 2 < min_velocity ** 2:
+        v_x = random.randint(-max_velocity, max_velocity)
+        v_y = random.randint(-max_velocity, max_velocity)
+    ball.v_x = v_x
+    ball.v_y = v_y
 
 
 def main(friction=0.02):
@@ -21,17 +27,17 @@ def main(friction=0.02):
     surface = pygame.display.set_mode(Window.SIZE)  # Displaying on specified window size
 
     paddle1 = Paddle(
-        x=100,
+        x=Window.HEIGHT // 2,
         y=100,
         v_x=0,
         v_y=0,
         color=Colors.PINK,
         friction=friction,
-        key_up=pygame.K_q,
-        key_down=pygame.K_a,
+        key_up=pygame.K_w,
+        key_down=pygame.K_s,
     )
     paddle2 = Paddle(
-        x=100,
+        x=Window.HEIGHT // 2,
         y=Window.WIDTH - 100,
         v_x=0,
         v_y=0,
