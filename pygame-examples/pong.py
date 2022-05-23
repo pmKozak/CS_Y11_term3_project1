@@ -12,7 +12,7 @@ def restart_game(ball: Ball, min_velocity: int = 30, max_velocity: int = 50):
     ball.y = Window.HEIGHT // 2
     v_x = 0
     v_y = 0
-    while v_x ** 2 + v_y ** 2 < min_velocity ** 2:
+    while v_y < min_velocity / 2 or v_x ** 2 + v_y ** 2 < min_velocity ** 2:
         v_x = random.randint(-max_velocity, max_velocity)
         v_y = random.randint(-max_velocity, max_velocity)
     ball.v_x = v_x
