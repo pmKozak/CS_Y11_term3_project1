@@ -5,16 +5,16 @@ from object import Object
 
 def control_object(obj):
     if pygame.key.get_pressed()[pygame.K_UP]:
-        obj.v_x -= 10
-    if pygame.key.get_pressed()[pygame.K_DOWN]:
-        obj.v_x += 10
-    if pygame.key.get_pressed()[pygame.K_RIGHT]:
-        obj.v_y += 10
-    if pygame.key.get_pressed()[pygame.K_LEFT]:
-        obj.v_y -= 10
-    if pygame.key.get_pressed()[pygame.K_SPACE]:
-        obj.v_x = 0
-        obj.v_y = 0
+        obj.v_x = -100
+    elif pygame.key.get_pressed()[pygame.K_DOWN]:
+        obj.v_x = 100
+    elif pygame.key.get_pressed()[pygame.K_RIGHT]:
+        obj.v_y = 100
+    elif pygame.key.get_pressed()[pygame.K_LEFT]:
+        obj.v_y = -100
+    #else:
+    #    obj.v_x = 10
+    #    obj.v_y = 0
 
 
 def main():
@@ -22,7 +22,7 @@ def main():
         x=100,
         y=100,
         height=40,
-        width=40,
+        width=80,
         v_x=0,
         v_y=0,
         color=Colors.PINK,
