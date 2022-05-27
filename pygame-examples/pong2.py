@@ -4,20 +4,6 @@ from paddle2 import Paddle
 from ball2 import Ball
 
 
-def control_object(obj):
-    if pygame.key.get_pressed()[pygame.K_UP]:
-        obj.v_x -= 10
-    if pygame.key.get_pressed()[pygame.K_DOWN]:
-        obj.v_x += 10
-    if pygame.key.get_pressed()[pygame.K_RIGHT]:
-        obj.v_y += 10
-    if pygame.key.get_pressed()[pygame.K_LEFT]:
-        obj.v_y -= 10
-    if pygame.key.get_pressed()[pygame.K_SPACE]:
-        obj.v_x = 0
-        obj.v_y = 0
-
-
 def main():
     paddle1 = Paddle(
         x=100,
