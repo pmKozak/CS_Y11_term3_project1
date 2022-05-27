@@ -5,8 +5,10 @@ class Window:
 
 
 class Colors:
-    PINK = (0, 20, 147)
-    GREEN = (255, 0, 0)
+    PINK = (255, 20, 147)
+    GREEN = (0, 255, 0)
+    BLUE = (0, 0, 255)
+    WHITE = (255, 255, 255)
 
 
 class Gravity:
